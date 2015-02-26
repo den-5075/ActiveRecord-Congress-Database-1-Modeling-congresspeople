@@ -1,17 +1,45 @@
 require 'csv'
+require_relative '../app/models/legislator'
 
 class SunlightLegislatorsImporter
   def self.import(filename)
     csv = CSV.new(File.open(filename), :headers => true)
     csv.each do |row|
+      temphash = {}
       row.each do |field, value|
         # TODO: begin
+        temphash[field] = value
         raise NotImplementedError, "TODO: figure out what to do with this row and do it!"
         # TODO: end
       end
+      Legislator.create(temphash)
     end
   end
 end
+
+# class SunlightLegislatorsImporter
+#   def self.import(filename)
+#     csv = CSV.new(File.open(filename), :headers => true)
+#     csv.each do |row|
+#       hash = {}
+#       row.each do |field, value|
+#         hash[field.to_sym] = value
+#         p hash
+#         p value
+#       end
+#       # p row
+#       # p hash
+
+
+      
+#         # TODO: begin
+#         # raise NotImplementedError, "TODO: figure out what to do with this row and do it!"
+#         # TODO: end
+        
+#         Legislator.create(hash)
+#       end
+#     end
+# end
 
 # IF YOU WANT TO HAVE THIS FILE RUN ON ITS OWN AND NOT BE IN THE RAKEFILE, UNCOMMENT THE BELOW
 # AND RUN THIS FILE FROM THE COMMAND LINE WITH THE PROPER ARGUMENT.
